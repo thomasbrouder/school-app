@@ -15,15 +15,14 @@ export class ListPage {
     this.selectedItem = navParams.get('item');
 
     // Let's populate this page with some filler content for funzies
-    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-    'american-football', 'boat', 'bluetooth', 'build'];
-
+    this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane'];
+    
     this.items = [];
-    for (let i = 1; i < 11; i++) {
+    for (let i = 1; i < 6; i++) {
       this.items.push({
         title: 'Item ' + i,
         note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+        icon: this.icons[i]
       });
     }
   }
