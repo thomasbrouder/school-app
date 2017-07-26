@@ -8,14 +8,14 @@
 </ion-header>
 
 <ion-content padding>
-  <label for="ligne">Ligne : </label>
-  <select name="ligne" id="ligne" (change)="getBus($event.target.value)">
-    <option value="C6">C6</option>
-    <option value="75">75</option>
-  </select>
-  <ul>
-    <li *ngFor="let time of times">
+  <ion-label>Ligne</ion-label>
+  <ion-select [(ngModel)]="ligne" (ionChange)="getBus()">
+    <ion-option value="C6">C6</ion-option>
+    <ion-option value="75">75</ion-option>
+  </ion-select>
+  <ion-list>
+    <ion-item *ngFor="let time of times">
       {{time}}
-    </li>
-  </ul>
+    </ion-item>
+  </ion-list>
 </ion-content>

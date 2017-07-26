@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
@@ -9,21 +8,21 @@ import 'rxjs/add/operator/toPromise';
   templateUrl: 'bus.html'
 })
 export class BusPage implements OnInit {
-
   times = [];
+  ligne = "C6";
 
-  constructor(public navCtrl: NavController, private http: Http) {}
+  constructor(private http: Http) {}
 
   ngOnInit(): void {
-    this.getBus("C6");
+    this.getBus()
   }
 
-  getBus(type : string): void {
+  getBus(): void {
     this.http.get('tan/ewp/tempsattente.json/CTRE')
       .toPromise()
       .then(response => {
          this.times = response.json()
-          .filter(schedule => schedule.ligne.numLigne === type && schedule.sens === 2)
+          .filter(schedule => schedule.ligne.numLigne === this.ligne && schedule.sens === 2)
           .map(schedule => schedule.temps);
          if (this.times.length === 0) {
            this.times.push('Pas de bus prochainement')
