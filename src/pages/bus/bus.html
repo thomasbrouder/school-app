@@ -9,19 +9,24 @@
 
 <ion-content padding>
   <h3>Bus</h3>
-    
+
     <p>Ici, nous mettrons les horaires des bus !</p>
-    
+
     <form method="post" action="traitement.php">
        <p>
            <label for="ligne">Ligne</label><br />
-           <select name="ligne" id="ligne">
+           <select name="ligne" id="ligne" (change)="getBus($event.target.value)">
                <option value="C6">C6</option>
                <option value="75">75</option>
                <option value="velo">A vélo</option>
            </select>
        </p>
+      <ul>
+        <li *ngFor="let time of times">
+          {{time}}
+        </li>
+      </ul>
     </form>
-    
+
     <p>Prochain bus dans 25 min</p>
 </ion-content>

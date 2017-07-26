@@ -1,5 +1,9 @@
 {
   "name": "AppliDeBase",
   "app_id": "",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "proxies": [{
+    "path": "/tan",
+    "proxyUrl": "http://open.tan.fr"
+  }]
 }
