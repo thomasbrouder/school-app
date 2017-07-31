@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class BusPage implements OnInit {
   times = [];
-  ligne = "C6";
+  sens = 2;
 
   constructor(private http: Http) {}
 
@@ -18,14 +18,14 @@ export class BusPage implements OnInit {
   }
 
   getBus(): void {
-    this.http.get('tan/ewp/tempsattente.json/CTRE')
+    this.http.get('tan/ewp/tempsattente.json/BJOI')
       .toPromise()
       .then(response => {
          this.times = response.json()
-          .filter(schedule => schedule.ligne.numLigne === this.ligne && schedule.sens === 2)
+          .filter(schedule => schedule.ligne.numLigne === "C6" && schedule.sens === this.sens)
           .map(schedule => schedule.temps);
          if (this.times.length === 0) {
-           this.times.push('Pas de bus prochainement')
+           this.times.push('Pas de bus prochainement (>1h) :(')
          }
       })
       .catch(error => console.error(error));
