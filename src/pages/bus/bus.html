@@ -9,15 +9,28 @@
 
 <ion-content padding>
 <ion-icon name="bus"></ion-icon>
-<ion-label color="dark">Ligne</ion-label>
 
   <ion-item>
-     <ion-label color="dark">Direction</ion-label>
-   <ion-select  [(ngModel)]="sens"(ionChange)="getBus()">
-     <ion-option value="2">Ville</ion-option>
-     <ion-option value="1">Campus</ion-option>
-   </ion-select>
-   </ion-item>
+
+    <ion-label color="dark">Arrêt</ion-label>
+
+    <ion-select [(ngModel)]="arretSelectione" (ionChange)="getBus()">
+        <ion-option *ngFor="let arret of arrets" [value]="arret">
+          {{arret.nom}}
+        </ion-option>
+    </ion-select>
+
+      <ion-select [(ngModel)]="ligne" (ionChange)="getBus()">
+        <ion-option  value="C6">C6</ion-option>
+        <ion-option  value="75">75</ion-option>
+      </ion-select>
+
+      <ion-select [(ngModel)]="sens" (ionChange)="getBus()">
+        <ion-option [value]="2">Ville</ion-option>
+        <ion-option [value]="1">Campus</ion-option>
+      </ion-select>
+
+  </ion-item>
 
    <ion-list>
      <ion-item *ngFor="let time of times">
