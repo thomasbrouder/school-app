@@ -20,14 +20,16 @@
         </ion-option>
     </ion-select>
 
-      <ion-select [(ngModel)]="ligne" (ionChange)="getBus()">
-        <ion-option  value="C6">C6</ion-option>
-        <ion-option  value="75">75</ion-option>
+      <ion-select [(ngModel)]="ligneSelectione" (ionChange)="getBus()">
+        <ion-option *ngFor="let ligne of arretSelectione.lignes" [value]="ligne">
+          {{ligne.bus}}
+        </ion-option>
       </ion-select>
 
-      <ion-select [(ngModel)]="sens" (ionChange)="getBus()">
-        <ion-option [value]="2">Ville</ion-option>
-        <ion-option [value]="1">Campus</ion-option>
+      <ion-select [(ngModel)]="sensSelectione" (ionChange)="getBus()">
+        <ion-option *ngFor="let sens of ligneSelectione.sens" [value]="sens">
+          {{sens}}
+        </ion-option>
       </ion-select>
 
   </ion-item>

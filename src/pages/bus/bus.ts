@@ -9,11 +9,19 @@ import 'rxjs/add/operator/toPromise';
 })
 export class BusPage implements OnInit {
   times = [];
-  sens = 2;
-  ligne="C6";
-  arretSelectione={id:'CTRE', nom:'Chantrerie'};
-  arrets=[{id:'CTRE', nom:'Chantrerie'},{id:'BJOI', nom:'Beaujoire'},{id:'COCH', nom:'Cochard'},
-    {id:'FOCH', nom:'Foch'},{id:'CRQU', nom:'Place du Cirque'},{id:'FACU', nom:'Facultés'}];
+  sensSelectione= ['Ville'];
+  ligneSelectione={bus:'C6',sens:['Ville']};
+  arretSelectione={id:'CTRE', nom:'Chantrerie',lignes:[{bus:'C6',sens:['Ville']},{bus:'75',sens:['Ville']}]};
+  arrets=[
+    {id:'CTRE', nom:'Chantrerie',lignes:[{bus:'C6',sens:['Ville']},{bus:'75',sens:['Ville']}]},
+    {id:'BJOI', nom:'Beaujoire',lignes:[{bus:'C6',sens:['Campups','Ville']},{bus:'75',sens:['Campus','Ville']}]},
+    {id:'COCH', nom:'Cochard',lignes:[{bus:'C6',sens:['Campus','Ville']}]},
+    {id:'FOCH', nom:'Foch',lignes:[{bus:'C6',sens:['Campus','Ville']}]},
+    {id:'CRQU', nom:'Place du Cirque',lignes:[{bus:'C6',sens:['Campus','Ville']}]},
+    {id:'FACU', nom:'Facultés',lignes:[{bus:'75',sens:['Campus']}]},
+    ];
+  //lignes=['C6','75'];
+ // sens=['Campus','Ville'];
 
   constructor(private http: Http) {}
 
@@ -22,12 +30,12 @@ export class BusPage implements OnInit {
   }
 
   getBus(): void {
-    console.log(this.arretSelectione);
+    console.log(this.sensSelectione[0]);
     this.http.get('tan/ewp/tempsattente.json/'+this.arretSelectione.id)
       .toPromise()
       .then(response => {
          this.times = response.json()
-          .filter(schedule => schedule.ligne.numLigne === this.ligne && schedule.sens === this.sens)
+          .filter(schedule => schedule.ligne.numLigne === this.ligneSelectione.bus /*&& schedule.sens === this.sensSelectione[0]*/)
           .map(schedule => schedule.temps);
          if (this.times.length === 0) {
            this.times.push('Pas de bus prochainement (>1h) :(')
